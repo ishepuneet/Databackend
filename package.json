@@ -1,0 +1,30 @@
+{
+  "name": "rose-day",
+  "version": "1.0.0",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "mongoose": "^9.1.6",
+    "nodemailer": "^8.0.1",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ishepuneet/backend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ishepuneet/backend/issues"
+  },
+  "homepage": "https://github.com/ishepuneet/backend#readme",
+  "description": ""
+}
