@@ -52,7 +52,7 @@ function yesClick() {
 
 /* Send data to backend */
 function sendToServer(data) {
-  fetch("https://backend-h2qm.onrender.com", {
+  fetch("https://databackend-jmls.onrender.com/send-location", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
