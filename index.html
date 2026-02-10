@@ -1,47 +1,37 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MahaShivratri Invite</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MahaShivratri Invite</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
-
 <body>
 
-    <div class="container">
+  <div class="container">
+    <h2 id="topText"></h2>
+    <h1 id="mainText"></h1>
 
-        <h2 class="top-text" id="topText"></h2>
-        <h1 class="main-text" id="mainText"></h1>
-
-
-        <!-- Shiva Image -->
-        <div class="image-box">
-            <!-- <img id="shivImg" src="./shivshakti.jpg" alt="Lord Shiva"> -->
-        </div>
-
-        <!-- Buttons -->
-        <div class="btn-box">
-            <button class="btn yes" onclick="yesClick()">Haan 🙏</button>
-            <button class="btn no" id="noBtn" onmouseover="moveNo()">Nahi 😅</button>
-        </div>
-
+    <!-- Shiva Image (optional) -->
+    <div class="image-box">
+      <!-- <img id="shivImg" src="./shivshakti.jpg" alt="Lord Shiva"> -->
     </div>
 
-    <!-- Flower Animation Container -->
+    <!-- Buttons -->
+    <div class="btn-box">
+      <button class="btn yes" id="yesBtn">Haan 🙏</button>
+      <button class="btn no" id="noBtn">Nahi 😅</button>
+    </div>
+  </div>
 
-    <div id="flowers"></div>
+  <!-- Flower Animation Container -->
+  <div id="flowers"></div>
 
-    <!-- Temple Bell Sound -->
+  <!-- Temple Bell Sound -->
+  <audio id="bell" loop src="./Dooron Dooron Unplugged Paresh Pahuja 128 Kbps (mp3cut.net).mp3"></audio>
 
-    <audio id="bell" loop src="./Dooron Dooron Unplugged Paresh Pahuja 128 Kbps (mp3cut.net).mp3"></audio>
-
-    <script src="script.js"></script>
-
+  <!-- Script -->
+  <script src="script.js"></script>
 </body>
-
 </html>

